@@ -30,8 +30,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 bat '''
-                    docker stop jenkins-demo-app
-                    docker rm jenkins-demo-app
+                    docker stop jenkins-demo-app 2> NUL || exit /b 0
+                    docker rm jenkins-demo-app 2> NUL || exit /b 0
                     docker run -d -p 3000:3000 --name jenkins-demo-app jenkins-1:latest
                 '''
             }
